@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- CHARSET -->
+
+        <meta charset="UTF-8">
+
+        <!-- MICROSOFT EDGE COMPATIBILITY -->
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- VIEWPORT -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Perguntas e Respostas - rocket.q</title>
+        <link rel="shortcut icon" href="/images/favicon.svg" type="image/svg">
+
+        <!-- CSS -->
+
+        <link rel="stylesheet" href="/styles/global.css">
+        <link rel="stylesheet" href="/styles/room.css">
+        <link rel="stylesheet" href="/styles/modal.css">
+
+        <!-- GOOGLE FONTS -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="room" class="content">
+            <header>
+                <a href="/">
+                    <img src="/images/logo.svg" alt="rocket.q">
+                </a>
+
+                <div class="buttons">
+                    <button class="button" id="copy-code" data-id="<%= roomId %>">
+                        #<%= roomId %> 
+                        <img src="/images/copy.svg" alt="Copiar código da sala">
+                    </button>
+                    <a class="button" href="/create-pass" id="create-room">
+                        <img src="/images/people.svg" alt="Criar sala">
+                        Criar sala
+                    </a>
+                </div>
+            </header>
+            <main>
+                <section id="question-form">
+                    <h2>Faça sua pergunta</h2>
+                    <form action="/question/create/<%= roomId %> " method="POST">
+                        <label class="sr-only" for="question">O que você quer perguntar?</label>
+                        <textarea name="question" id="question" required placeholder="O que você quer perguntar?"></textarea>
+                        <footer>
+                            <div>
+                                <img src="/images/padlock.svg" alt="Ícone - Cadeado">
+                                Esta pergunta é anônima
+                            </div>
+                            <div>
+                                <button class="button" id="send-question">Enviar</button>
+                            </div>
+                        </footer>
+                    </form>
+                </section>
+                <% if(questions.length > 0 || readQuestions.length > 0){ %> 
+                    <section class="questions">
+                        <h2 class="sr-only">Perguntas da comunidade</h2>
+    
+                        <% questions.forEach(question => { %> 
+                            <div class="question">
+                                <div class="question-content">
+                                    <div class="user-image">
+                                        <img src="/images/question-user.svg" alt="Ícone - Usuário">
+                                    </div>
+                                    <p class="question-text"><%= question.title %> </p>
+                                </div>
+                                <footer>
+                                    <div class="question-buttons">
+                                        <button class="check-question" data-id="<%= question.id %>">
+                                            <img src="/images/check.svg" alt="Ícone - Marcar com lida">
+                                            Marcar como lida
+                                        </button>
+                                        <button class="delete-question" data-id="<%= question.id %>">
+                                            <img src="/images/delete.svg" alt="Ícone - Deletar pergunta">
+                                            Excluir
+                                        </button>
+                                    </div>
+                                </footer>
+                            </div>
+                        <% }) %>
+                        <% readQuestions.forEach(readQuestion => { %> 
+                            <div class="question read">
+                                <div class="question-content">
+                                    <div class="user-image">
+                                        <img src="/images/question-user.svg" alt="Ícone - Usuário">
+                                    </div>
+                                    <p class="question-text"><%= readQuestion.title %> </p>
+                                </div>
+                                <footer>
+                                    <div class="question-buttons">
+                                        <button class="delete-question" data-id="<%= readQuestion.id %>">
+                                            <img src="/images/delete.svg" alt="Ícone - Deletar pergunta">
+                                            Excluir
+                                        </button>
+                                    </div>
+                                </footer>
+                            </div>
+                        <% }) %>
+                    </section>
+                <% } else { %>
+                    <%- include('parts/no-questions') %>
+                <% } %> 
+            </main>
+        </div>
+
+        <!-- MODAL -->
+
+        <div class="modal-overlay">
+            <div class="modal">
+                <h2 id="modal-title"></h2>
+                <p id="modal-desc"></p>
+                <form action="/question/:room/:question/:action" method="POST">
+                    <label for="password" class="sr-only">Digite a sua senha</label>
+                    <div class="input-field">
+                        <input type="password" required name="password" placeholder="Digite a sua senha" id="password">
+                    </div>
+                    <div class="buttons">
+                        <div class="button light-blue modal-cancel">Não, cancelar</div>
+                        <button id="modal-action" class="button red modal-delete"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="/scripts/modal.js"></script>
+        <script src="/scripts/main.js"></script>
+    </body>
+</html>

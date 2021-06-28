@@ -1,0 +1,121 @@
+.modal-overlay{
+    background: #040911c7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-overlay.hidden{
+    animation: modal-fadeout .3s 1 forwards;
+}
+
+.modal-overlay.active{
+    opacity: 1;
+    pointer-events: auto;
+
+    animation: modal-fadein .3s 1 forwards ease;
+}
+
+.modal-overlay.active > body{
+    overflow: hidden;
+}
+
+.modal{
+    width: 59rem;
+    height: 36.2rem;
+    border-radius: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--background);
+}
+
+.modal h2{
+    color: var(--black);
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 1.2rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.modal p{
+    font-size: 1.6rem;
+    color: var(--grey-dark);
+}
+
+.modal .input-field{
+    text-align: center;
+}
+
+.modal input{
+    outline: none;
+    width: 36.5rem;
+    height: 4.8rem;
+    line-height: 2.2rem;
+    font-size: 1.6rem;
+    transition: .2s ease;
+    margin-bottom: 4rem;
+    margin-top: 2.4rem;
+    color: var(--black);
+    padding: 1.3rem 1.2rem 1.3rem 1.6rem;
+    font-family: "Open sans", sans-serif;
+    border-radius: .8rem;
+    border: 2px solid var(--grey-blue);
+}
+
+.modal input:focus{
+    border: 2px solid var(--blue);
+}
+
+.modal .buttons{
+    display: flex;
+}
+
+.button.red{
+    background: var(--red);
+    color: var(--white);
+    margin-left: .8rem;
+    height: 5rem;
+}
+
+.button.light-blue{
+    background: var(--grey-light);
+    color: var(--grey-dark);
+    height: 5rem;
+}
+
+.button.blue{
+    background: var(--blue);
+    color: var(--white);
+    margin-left: .8rem;
+    height: 5rem;
+}
+
+@keyframes modal-fadein{
+    from{
+        opacity: 0;
+    }
+
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes modal-fadeout{
+    from{
+        opacity: 1;
+    }
+
+    to{
+        opacity: 0;
+    }
+}

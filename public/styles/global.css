@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body.hidden{
+    overflow: hidden;
+}
+
+:root{
+    --background: #F6FAFF;
+    --blue: #3485FF;
+    --black: #0D114F;
+    --white: #FAFAFA;
+    --red: #E83F5B;
+    --light-blue: #E0ECFF;
+    --overlay: #040911;
+    --icon-details: #A5B0C1;
+
+    --grey-dark: #4D5E77;
+    --grey-blue: #A1B2CD;
+    --grey-light:#E5EAF1;
+    --grey-medium : #eaecf2;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    display: flex;
+
+    min-height: 100vh;
+    background: var(--background);
+}
+
+body, input, button, textarea{
+    font-size: clamp(14px, 1.6rem, 2vw);
+
+    font-family: "Open Sans", sans-serif;
+}
+
+.content{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.sr-only{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0;
+    margin: -1px;
+    clip-path: rect(0, 0, 0, 0);
+}
+
+.content header{
+    width: 80%;
+    margin: 3.5rem auto;
+}
+
+.content header img{
+    width: 16.7rem;
+}
+
+::-webkit-scrollbar{
+    width: .5rem;
+}
+
+::-webkit-scrollbar-thumb{
+    background: var(--blue);
+}
